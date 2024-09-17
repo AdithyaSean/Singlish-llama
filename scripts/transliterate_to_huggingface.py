@@ -1,6 +1,5 @@
 import re
 from datasets import load_dataset, DatasetDict
-from huggingface_hub import HfApi, HfFolder
 
 def sinhala_to_singlish(sinhala_text):
     vowels = {'අ': 'a', 'ආ': 'aa', 'ඇ': 'a', 'ඈ': 'aa', 'ඉ': 'i', 'ඊ': 'ee', 'උ': 'u', 'ඌ': 'uu','ඍ': 'ru', 'ඎ': 'ruu', 'ඏ': 'lu', 'ඐ': 'luu', 'එ': 'e', 'ඒ': 'ee', 'ඓ': 'ai', 'ඔ': 'o','ඕ': 'oo', 'ඖ': 'au', 'ං': 'n', 'ඃ': 'h'}
@@ -47,32 +46,28 @@ def transliterate_value(value):
     else:
         return value
 
-def transliterate_dataset(dataset, text_column):
+def transliterate_dataset(dataset):
+    text_column = dataset.column_names[0]
+
     def transliterate_example(example):
-        example[text_column] = transliterate_value(example[text_column])
+        example["text"] = transliterate_value(example[text_column])
         return example
 
-    return dataset.map(transliterate_example)
+    return dataset.map(transliterate_example, remove_columns=[text_column])
 
-# Load dataset from Hugging Face
-dataset_name = "9wimu9/sinhala_dataset_59m"
-dataset = load_dataset(dataset_name)
+def transliterate_to_huggingface():
+    input_dataset_repository = input("Enter the Hugging Face dataset repository name: ")
+    output_dataset_repository = input("Enter the Hugging Face dataset repository name to push the transliterated dataset: ")
+    api_token = input("Enter your Hugging Face API token: ")
 
-# Specify the column containing the Sinhala text
-text_column = input("Enter the name of the column containing Sinhala text: ")
+    dataset = load_dataset(input_dataset_repository)
 
-# Process each split in the dataset
-transliterated_dataset = DatasetDict()
-for split in dataset.keys():
-    transliterated_dataset[split] = transliterate_dataset(dataset[split], text_column)
+    transliterated_splits = {}
+    for split in dataset.keys():
+        transliterated_splits[split] = transliterate_dataset(dataset[split])
 
-# Save the transliterated dataset back to Hugging Face
-output_dataset_name = "adithyasean/singlish"
+    transliterated_dataset = DatasetDict(transliterated_splits)
 
-# Authenticate using the API token
-api = HfApi()
-api_token = "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"
-HfFolder.save_token(api_token)
+    transliterated_dataset.push_to_hub(output_dataset_repository, token=api_token)
 
-# Push the dataset to the hub
-transliterated_dataset.push_to_hub(output_dataset_name, token=api_token)
+transliterate_to_huggingface()

@@ -8,4 +8,6 @@ def convert_parquet_to_jsonl(parquet_file, jsonl_file):
     df.to_json(jsonl_file, orient='records', lines=True, force_ascii=False)
 
 # Example usage
-convert_parquet_to_jsonl(input('input file and absolute path: '), 'datasets/sinhala/sinhala_' + input('Name of the output file: ') + '.jsonl')
+parquet_file = input("input file: ")
+jsonl_file = input("output file: ")
+convert_parquet_to_jsonl(parquet_file, jsonl_file)

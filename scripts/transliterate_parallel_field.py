@@ -1,6 +1,5 @@
 from scripts.sinhala_to_singlish import sinhala_to_singlish
 from datasets import load_dataset, DatasetDict
-import re
 
 # Function to remove specified prefixes from text
 def remove_prefixes(text):

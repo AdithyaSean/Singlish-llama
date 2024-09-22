@@ -13,6 +13,6 @@ def push_to_huggingface():
         transliterated_splits[split] = dataset[split].map(lambda example: {"text": sinhala_to_singlish(example["text"])})
 
     transliterated_dataset = DatasetDict(transliterated_splits)
-    transliterated_dataset.push_to_hub(output_dataset_repository, token=api_token)
+    transliterated_dataset.push_to_hub(output_dataset_repository, token=api_token, private=True)
 
 push_to_huggingface()

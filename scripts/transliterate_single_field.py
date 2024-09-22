@@ -8,7 +8,9 @@ dataset = load_dataset(input_dataset_repository)
 
 transliterated_splits = {}
 for split in dataset.keys():
-    transliterated_splits[split] = dataset[split].map(lambda example: {"text": sinhala_to_singlish(example["text"])})
+    transliterated_splits[split] = dataset[split].map(lambda example: {
+        "text": sinhala_to_singlish(example["text"])
+    })
 
 transliterated_dataset = DatasetDict(transliterated_splits)
 transliterated_dataset.push_to_hub(output_dataset_repository, private=True)

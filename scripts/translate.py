@@ -22,8 +22,8 @@ def translate_content_to_sinhala(input_file, output_file):
 			outfile.write('\n')
 
 # Specify your input and output file paths
-input_file_path = 'datasets/english/english_basic_train_dataset2_part' + input('input file name: ') + '.jsonl'
-output_file_path = 'datasets/sinhala/sinhala_basic_train_dataset2_part' + input('output file name: ') + '.jsonl'
+input_file_path = input('input file name: ')
+output_file_path = input('output file name: ')
 
 # Call the function
 translate_content_to_sinhala(input_file_path, output_file_path)

@@ -25,10 +25,12 @@ def process_dataset(dataset):
     return Dataset.from_dict(combined_data)
 
 # Main script
-dataset = load_dataset("adithyasean/alpaca-singlish", split='train')
+dataset_name = input("Enter the Hugging Face dataset repository name: ")
+save_dataset_to = input("Enter the Hugging Face dataset repository name to push the processed dataset: ")
+dataset = load_dataset(dataset_name, split='train')
 
 # Process the dataset
 processed_dataset = process_dataset(dataset)
 
 # Save processed dataset if needed
-processed_dataset.push_to_hub("adithyasean/alpaca-singlish", private=True)
+processed_dataset.push_to_hub(save_dataset_to, private=True)

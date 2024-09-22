@@ -2,9 +2,11 @@ import json
 
 # Initialize an empty set to store unique Unicode numbers of non-ASCII characters
 non_ascii_unicode_numbers = set()
+input_file = input("Enter the input file path: ")
+write_output_file = input("write path to output file: ")
 
 # Open the reddit.jsonl file for reading
-with open('datasets/singlish/reddit.jsonl', 'r', encoding='utf-8') as file:
+with open(input_file, 'r', encoding='utf-8') as file:
     # Process each line in the file
     for line in file:
         # Parse the line as JSON
@@ -33,7 +35,7 @@ with open('datasets/singlish/reddit.jsonl', 'r', encoding='utf-8') as file:
     sorted_non_ascii_unicode_numbers = sorted(list(non_ascii_unicode_numbers))
     
     # Create or open the output file in write mode
-    with open('datasets/singlish/non_ascii_unicode_numbers.txt', 'w', encoding='utf-8') as output_file:
+    with open(write_output_file, 'w', encoding='utf-8') as output_file:
         # Write each Unicode representation to the file, each on a new line
         for unicode_representation in sorted_non_ascii_unicode_numbers:
             output_file.write(f'{unicode_representation}\n')

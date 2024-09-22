@@ -29,4 +29,5 @@ def split_jsonl_file(input_file, lines_per_file):
 		outfile.close()
 
 # Example usage
-split_jsonl_file('datasets/singlish/singlish_reddit_train_dataset2.jsonl', 500)
+file_to_split = input("Enter the path to the JSONL file to split: ")
+split_jsonl_file(file_to_split, 500)

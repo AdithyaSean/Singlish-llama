@@ -2,9 +2,10 @@ import json
 
 # Create an empty list
 reddit_data = []
+input_file = input("Enter the input file path: ")
 
 # Open the file
-with open('datasets/singlish/reddit_tuning_dataset.jsonl', 'r', encoding='utf-8') as file:
+with open(input_file, 'r', encoding='utf-8') as file:
     # Iterate over each line
     for line in file:
         # Parse the line as JSON

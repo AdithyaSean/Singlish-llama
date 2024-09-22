@@ -1,32 +1,18 @@
-def sinhala_to_singlish(sinhala_text):
-    vowels = {'අ': 'a', 'ආ': 'aa', 'ඇ': 'a', 'ඈ': 'aa', 'ඉ': 'i', 'ඊ': 'ee', 'උ': 'u', 'ඌ': 'uu','ඍ': 'ru', 'ඎ': 'ruu', 'ඏ': 'lu', 'ඐ': 'luu', 'එ': 'e', 'ඒ': 'ee', 'ඓ': 'ai', 'ඔ': 'o','ඕ': 'oo', 'ඖ': 'au', 'ං': 'n', 'ඃ': 'h'}
-    consonants = {'ක': 'k', 'ඛ': 'kh', 'ග': 'g', 'ඟ': 'ng', 'ඝ': 'gh', 'ඞ': 'ng', 'ච': 'ch', 'ඡ': 'ch', 'ජ': 'j', 'ඣ': 'jh', 'ඤ': 'ny', 'ඥ': 'gny', 'ට': 't', 'ඨ': 't', 'ඩ': 'd', 'ඬ': 'nd', 'ඪ': 'd', 'ණ': 'n', 'ත': 'th', 'ථ': 'th', 'ද': 'd', 'ඳ': 'nd', 'ධ': 'dh', 'න': 'n', 'ප': 'p', 'ඵ': 'p', 'බ': 'b', 'භ': 'bh', 'ඹ': 'mba', 'ම': 'm', 'ය': 'y', 'ර': 'r', 'ල': 'l', 'ව': 'w', 'ශ': 'sh', 'ෂ': 'sh', 'ස': 's','හ': 'h', 'ළ': 'l', 'ෆ': 'f'}
-    vowel_modifiers = {'්': '', 'ා': 'a', 'ැ': 'a', 'ෑ': 'a', 'ි': 'i', 'ී': 'i', 'ු': 'u', 'ූ': 'u','ෙ': 'e', 'ේ': 'e', 'ෛ': 'ai', 'ො': 'o', 'ෝ': 'o', 'ෞ': 'au','ෟ': 'ru', 'ෳ': 'ruu', '්‍ය': 'ya', 'ෘ': 'ru'}
-    singlish_text = ""
-    i = 0
+from scripts.sinhala_to_singlish import sinhala_to_singlish
+from datasets import load_dataset, DatasetDict
 
-    while i < len(sinhala_text):
-        if sinhala_text[i] in vowels:
-            singlish_text += vowels.get(sinhala_text[i])
-            i += 1
+def push_to_huggingface():
+    input_dataset_repository = input("Enter the Hugging Face dataset repository name: ")
+    output_dataset_repository = input("Enter the Hugging Face dataset repository name to push the transliterated dataset: ")
+    api_token = input("Enter your Hugging Face API token: ")
 
-        elif sinhala_text[i] in consonants:
-            singlish_text += consonants.get(sinhala_text[i])
-            i += 1
+    dataset = load_dataset(input_dataset_repository)
 
-            if i < len(sinhala_text) and sinhala_text[i] in vowel_modifiers:
-                singlish_text += vowel_modifiers.get(sinhala_text[i])
-                i += 1
+    transliterated_splits = {}
+    for split in dataset.keys():
+        transliterated_splits[split] = dataset[split].map(lambda example: {"text": sinhala_to_singlish(example["text"])})
 
-                if i < len(sinhala_text) and sinhala_text[i] in vowel_modifiers:
-                    singlish_text += vowel_modifiers.get(sinhala_text[i])
-                    i += 1
+    transliterated_dataset = DatasetDict(transliterated_splits)
+    transliterated_dataset.push_to_hub(output_dataset_repository, token=api_token, private=True)
 
-            else:
-                singlish_text += 'a'
-
-        else:
-            singlish_text += sinhala_text[i]
-            i += 1
-
-    return singlish_text
+push_to_huggingface()

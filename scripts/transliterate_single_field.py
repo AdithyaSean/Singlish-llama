@@ -1,4 +1,4 @@
-import sinhala_to_singlish
+from sinhala_to_singlish import sinhala_to_singlish
 from datasets import load_dataset, DatasetDict
 
 input_dataset_repository = input("Enter the Hugging Face dataset repository name: ")

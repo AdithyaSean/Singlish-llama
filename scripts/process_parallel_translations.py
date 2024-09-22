@@ -4,7 +4,7 @@ from datasets import load_dataset, Dataset
 def process_unstructured_dataset(dataset):
     organized_data = {
         "English": [],
-        "Singlish": []
+        "Sinhala": []
     }
     
     for entry in dataset['translation']:
@@ -13,7 +13,7 @@ def process_unstructured_dataset(dataset):
         
         if english_text and singlish_text:  # Check if both texts are not empty
             organized_data["English"].append(english_text)
-            organized_data["Singlish"].append(singlish_text)
+            organized_data["Sinhala"].append(singlish_text)
 
     return Dataset.from_dict(organized_data)
 

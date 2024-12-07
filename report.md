@@ -1,13 +1,66 @@
 # Development of a Singlish Language Model Using Advanced Machine Learning Techniques
 
-By [Your Name]  
-Higher National Diploma in Computing  
-[Institution Name]  
+By Adithya Sean Bandara Ekanayaka 
+Higher National Diploma in Software Engineering
+National Institute of Business Management School of Computing
 December 2024
 
 ## Abstract
 
 This report presents a comprehensive study on the development of a language model for Singlish, a unique linguistic variant that combines Sinhala and English. Through the application of advanced machine learning techniques and the adaptation of Meta's Llama 3.1 8B model, this project demonstrates the potential of modern natural language processing in preserving and processing hybrid languages. The study encompasses the entire development process, from data collection and preprocessing to model training and evaluation, with particular emphasis on the challenges and solutions in handling bilingual text processing.
+
+## Table of Contents
+
+1. [Introduction](#1-introduction)
+   1.1. [Background](#11-background)
+   1.2. [Problem Statement](#12-problem-statement)
+2. [Literature Review](#2-literature-review)
+   2.1. [Language Model Development](#21-language-model-development)
+   2.2. [Hybrid Language Processing](#22-hybrid-language-processing)
+   2.3. [Efficient Model Adaptation](#23-efficient-model-adaptation)
+   2.4. [Cultural Preservation Through Technology](#24-cultural-preservation-through-technology)
+   2.5. [Resource-Efficient Computing](#25-resource-efficient-computing)
+   2.6. [Innovations in Model Efficiency](#26-innovations-in-model-efficiency)
+      2.6.1. [Memory-Efficient Training](#261-memory-efficient-training)
+      2.6.2. [Quantization Techniques](#262-quantization-techniques)
+   2.7. [Cultural Context in Language Models](#27-cultural-context-in-language-models)
+      2.7.1. [Preserving Cultural Nuances](#271-preserving-cultural-nuances)
+      2.7.2. [Hybrid Language Processing](#272-hybrid-language-processing)
+   2.8. [Resource Optimization Strategies](#28-resource-optimization-strategies)
+      2.8.1. [Hardware Utilization](#281-hardware-utilization)
+      2.8.2. [Training Optimization](#282-training-optimization)
+   2.9. [Future Trends and Directions](#29-future-trends-and-directions)
+3. [Methodology](#3-methodology)
+   3.1. [Model Selection and Architecture](#31-model-selection-and-architecture)
+      3.1.1. [Base Model Configuration](#311-base-model-configuration)
+   3.2. [Data Preparation and Processing](#32-data-preparation-and-processing)
+   3.3. [Model Adaptation Strategy](#33-model-adaptation-strategy)
+   3.4. [Training Process](#34-training-process)
+   3.5. [Multi-Adapter Architecture](#35-multi-adapter-architecture)
+      3.5.1. [Adapter Specialization](#351-adapter-specialization)
+      3.5.2. [Training Strategy](#352-training-strategy)
+   3.6. [Dataset Processing Pipeline](#36-dataset-processing-pipeline)
+      3.6.1. [General Text Processing](#361-general-text-processing)
+      3.6.2. [Wikipedia Article Processing](#362-wikipedia-article-processing)
+      3.6.3. [Translation Pair Processing](#363-translation-pair-processing)
+   3.7. [Training Configuration](#37-training-configuration)
+      3.7.1. [Base Configuration](#371-base-configuration)
+   3.8. [Implementation Challenges and Solutions](#38-implementation-challenges-and-solutions)
+      3.8.1. [Memory Management Challenges](#381-memory-management-challenges)
+      3.8.2. [Cultural Context Preservation](#382-cultural-context-preservation)
+      3.8.3. [Training Optimization](#383-training-optimization)
+      3.8.4. [Data Processing Challenges](#384-data-processing-challenges)
+4. [Results and Discussion](#4-results-and-discussion)
+   4.1. [Training Performance and Resource Utilization](#41-training-performance-and-resource-utilization)
+5. [Conclusions and Future Work](#5-conclusions-and-future-work)
+   5.1. [Technical Achievements](#51-technical-achievements)
+   5.2. [Cultural Impact](#52-cultural-impact)
+   5.3. [Future Research Directions](#53-future-research-directions)
+      5.3.1. [Technical Enhancements](#531-technical-enhancements)
+      5.3.2. [Applications and Extensions](#532-applications-and-extensions)
+   5.4. [Recommendations](#54-recommendations)
+   5.5. [Final Thoughts](#55-final-thoughts)
+[References](#references)
 
 ## 1. Introduction
 
@@ -184,6 +237,9 @@ These developments inform our approach to Singlish language model development, c
 
 ### 3.1 Model Selection and Architecture
 
+![Python Libraries and Setup](./images/python_libraries_and_setup.png)
+*Figure 1: Initial setup showing required Python libraries and dependencies*
+
 The selection of Meta's Llama 3.1 8B model as our base architecture was driven by several key considerations. This model represents an optimal balance between computational efficiency and performance capability, making it particularly suitable for our specialized task of Singlish language processing.
 
 #### 3.1.1 Base Model Configuration
@@ -204,6 +260,15 @@ The implementation utilizes the following key components:
 The choice of Unsloth as our optimization framework was particularly significant. Its ability to reduce hardware requirements while maintaining model performance was crucial for our resource-constrained environment. This decision enabled us to achieve efficient training on standard GPU hardware while preserving model quality.
 
 ### 3.2 Data Preparation and Processing
+
+![Data Preparation for Pretraining](./images/data_prep_pretraining_datasets.png)
+*Figure 2: Overview of data preparation for pretraining datasets*
+
+![Data Preparation for Wikipedia](./images/data_prep_wikipedia_datasets.png)
+*Figure 3: Data preparation process for Wikipedia datasets*
+
+![Data Preparation for Translation](./images/data_prep_translation_dataset.png)
+*Figure 4: Data preparation pipeline for translation datasets*
 
 Our data preparation strategy involved a comprehensive approach to collecting and processing Singlish text data. The final dataset compilation included:
 
@@ -232,6 +297,12 @@ Our data preparation strategy involved a comprehensive approach to collecting an
    - Batch processing optimization for efficient data loading
 
 ### 3.3 Model Adaptation Strategy
+
+![Checkpoints and Adapters](./images/checkpoints_and_adapters_initialization.png)
+*Figure 5: Model architecture showing checkpoints and adapters initialization*
+
+![Unsloth and Machine Status](./images/unsloth_and_machine_status.png)
+*Figure 6: Optimization status using Unsloth and machine utilization*
 
 Our adaptation strategy centered on Parameter-Efficient Fine-Tuning (PEFT) using Low-Rank Adaptation (LoRA). This approach was chosen for its ability to efficiently adapt large language models while maintaining performance and reducing computational requirements.
 
@@ -307,6 +378,12 @@ The training process was carefully designed to ensure effective learning while m
 This configuration was chosen based on empirical testing and resource constraints, providing an optimal balance between training efficiency and model performance.
 
 ### 3.5 Multi-Adapter Architecture
+
+![Alpaca Prompt Format](./images/alpaca_prompt_format.png)
+*Figure 7: Standard Alpaca prompt format for model training*
+
+![Alpaca Singlish Format](./images/alpaca_singlish_prompt_format.png)
+*Figure 8: Adapted Alpaca prompt format for Singlish training*
 
 A key innovation in our implementation is the use of multiple LoRA adapters, each specialized for different aspects of Singlish language processing. This approach provides several advantages:
 
@@ -526,6 +603,18 @@ These solutions not only addressed immediate technical challenges but also estab
 
 ## 4. Results and Discussion
 
+![Training Progress](./images/training_progress_and_convergence.png)
+*Figure 9: Training progress showing model convergence over time*
+
+![Basic Singlish Generation](./images/basic_singlish_text_generation.png)
+*Figure 10: Examples of basic Singlish text generation*
+
+![Advanced Generation](./images/text_generation_after_pretraining.png)
+*Figure 11: Improved text generation after pretraining*
+
+![Various Topics](./images/text_generation_various_topics.png)
+*Figure 12: Text generation across different topics and contexts*
+
 The implementation of our Singlish language model yielded remarkable results across multiple dimensions, demonstrating both technical efficiency and linguistic sophistication. This section presents a comprehensive analysis of our findings, supported by empirical data and qualitative observations.
 
 ### 4.1 Training Performance and Resource Utilization
@@ -731,51 +820,3 @@ lora_config = {
 - Transformers Version: 4.31.0
 - Unsloth Version: 0.3.0
 - Python Version: 3.9.16
-
-![Python Libraries and Setup](./images/python_libraries_and_setup.png)
-*Figure 1: Initial setup showing Python libraries and environment configuration*
-
-![Data Preparation - Wikipedia Datasets](./images/data_prep_wikipedia_datasets.png)
-*Figure 2: Data preparation process for Wikipedia datasets*
-
-![Data Preparation - Translation Dataset](./images/data_prep_translation_dataset.png)
-*Figure 3: Data preparation workflow for the translation dataset*
-
-![Data Preparation - Pretraining Datasets](./images/data_prep_pretraining_datasets.png)
-*Figure 4: Overview of data preparation for pretraining datasets*
-
-![Checkpoints and Adapters Initialization](./images/checkpoints_and_adapters_initialization.png)
-*Figure 5: Model architecture showing checkpoints and adapters initialization*
-
-![Unsloth and Machine Status](./images/unsloth_and_machine_status.png)
-*Figure 6: System configuration and Unsloth optimization status*
-
-![Training Progress and Convergence](./images/training_progress_and_convergence.png)
-*Figure 7: Model training progress and convergence metrics*
-
-![Basic Singlish Text Generation](./images/basic_singlish_text_generation.png)
-*Figure 8: Examples of basic Singlish text generation*
-
-![Text Generation After Pretraining](./images/text_generation_after_pretraining.png)
-*Figure 9: Text generation capabilities after pretraining phase*
-
-![Text Generation Various Topics](./images/text_generation_various_topics.png)
-*Figure 10: Model performance across various topics*
-
-![Real World Example 1](./images/real_world_example-1.png)
-*Figure 11: Real-world application example - Basic conversation*
-
-![Real World Example 2](./images/real_world_example_2.png)
-*Figure 12: Real-world application example - Complex dialogue*
-
-![Real World Example 3](./images/real_world_example_3.png)
-*Figure 13: Real-world application example - Cultural context*
-
-![Real World Example 4](./images/real_world_example_4.png)
-*Figure 14: Real-world application example - Mixed language processing*
-
-![Alpaca Prompt Format](./images/alpaca_prompt_format.png)
-*Figure 15: Standard Alpaca prompt format implementation*
-
-![Alpaca Singlish Prompt Format](./images/alpaca_singlish_prompt_format.png)
-*Figure 16: Adapted Alpaca prompt format for Singlish*

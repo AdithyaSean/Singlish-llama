@@ -1,7 +1,7 @@
 # Singlish-llama
 
 ## Description
-A specialized project focused on fine-tuning LLaMA models for Singlish (Singaporean-Malaysian English) language understanding and generation. This project utilizes advanced techniques including continued pre-training and optimization using Unsloth for improved performance on Singlish text processing.
+A specialized project focused on fine-tuning LLaMA models for Singlish (Sinhala-English) language understanding and generation. This project utilizes advanced techniques including continued pre-training and optimization using Unsloth for improved performance on Singlish text processing.
 
 ## Features
 - Continued pre-training of LLaMA 3 1.8B model on Singlish datasets
